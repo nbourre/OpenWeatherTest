@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace DemoLibrary.Weather
+namespace OpenWeatherAPI
 {
     public class OpenWeatherOneCallModel
     {
@@ -10,7 +10,7 @@ namespace DemoLibrary.Weather
         [JsonProperty("lat")]
         public double Latitude { get; set; }
 
-        
+
         public string Timezone { get; set; }
 
         [JsonProperty("timezone_offset")]
@@ -76,7 +76,7 @@ namespace DemoLibrary.Weather
         [JsonProperty("cod")]
         public long Cod { get; set; }
 
-        
+
     }
 
     public partial class Clouds

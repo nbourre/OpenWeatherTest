@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace DemoLibrary
+namespace OpenWeatherAPI
 {
     public static class ApiHelper
     {
@@ -12,7 +12,7 @@ namespace DemoLibrary
             ApiClient = new HttpClient();
             ApiClient.DefaultRequestHeaders.Accept.Clear();
             ApiClient.DefaultRequestHeaders.Accept.
-                Add(new MediaTypeWithQualityHeaderValue("application/json"));           
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
     }
 }

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DemoLibrary.Weather
+namespace OpenWeatherAPI.Secrets
 {
     public class SecretRevealer : ISecretRevealer
     {

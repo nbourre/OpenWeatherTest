@@ -1,5 +1,4 @@
-﻿using DemoLibrary.Weather;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace DemoLibrary
+namespace OpenWeatherAPI.Secrets
 {
     /// Source : https://www.twilio.com/blog/2018/05/user-secrets-in-a-net-core-console-app.html
     /// TODO : For the teacher! Améliorer pour faciliter l'utilisation de clé secrète, car c'est hardcodé...
@@ -28,10 +27,10 @@ namespace DemoLibrary
         private static Dictionary<string, string> secrets = new Dictionary<string, string>();
 
         private AppSecretConfigurations()
-        {   
+        {
             var devEnvVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
 
-            
+
             var isDevelopment = string.IsNullOrEmpty(devEnvVariable) || devEnvVariable.ToLower() == "development";
 
             var builder = new ConfigurationBuilder();
@@ -46,7 +45,7 @@ namespace DemoLibrary
             Configuration = builder.Build();
 
             Debug.WriteLine(Configuration.GetSection(nameof(Secrets)));
-            
+
 
             IServiceCollection services = new ServiceCollection();
 

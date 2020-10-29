@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DemoLibrary.Weather
+namespace OpenWeatherAPI.Secrets
 {
     public interface ISecretRevealer
     {

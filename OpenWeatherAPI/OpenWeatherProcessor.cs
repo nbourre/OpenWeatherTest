@@ -1,6 +1,5 @@
-﻿using DemoLibrary;
-using DemoLibrary.Weather;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using OpenWeatherAPI.Secrets;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,8 +18,8 @@ namespace OpenWeatherAPI
         public string BaseURL { get; set; }
         public string EndPoint { get; set; }
 
-        public string Longitude { get; set; } = "46.5668"; // Shawinigan par défaut
-        public string Latitude { get; set; } = "-72.7491";
+        public string Longitude { get; set; } = "-72.7491"; // Shawinigan par défaut
+        public string Latitude { get; set; } = "46.5668";
 
         private string longUrl;
 
@@ -35,7 +34,10 @@ namespace OpenWeatherAPI
         }
 
         
-
+        /// <summary>
+        /// Appel le endpoint One Call API
+        /// </summary>
+        /// <returns></returns>
         public async Task<OpenWeatherOneCallModel> GetOneCallAsync()
         {
             EndPoint = $"/onecall?";
@@ -56,6 +58,10 @@ namespace OpenWeatherAPI
             return await doOneCall();
         }
 
+        /// <summary>
+        /// Appel le endpoint weather
+        /// </summary>
+        /// <returns></returns>
         public async Task<OWCurrentWeaterModel> GetCurrentWeather()
         {
             EndPoint = $"/weather?";
