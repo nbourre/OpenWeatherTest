@@ -57,7 +57,7 @@ namespace OWApi_QuickTest.ViewModels
 
         private async void GetCurrentWeather(string obj)
         {
-            var currentWeather = await OpenWeatherProcessor.Instance.GetCurrentWeather();
+            var currentWeather = await OpenWeatherProcessor.Instance.GetCurrentWeatherAsync();
 
             if (currentWeather != null)
             {

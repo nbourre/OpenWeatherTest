@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using OpenWeatherAPI.Secrets;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,13 +6,19 @@ using System.Web;
 
 namespace OpenWeatherAPI
 {
+    /// <summary>
+    /// Classe permettant de faire des appels au service Open Weather
+    /// Il faut avoir une clé API pour pouvoir l'utiliser
+    /// </summary>
     public class OpenWeatherProcessor
     {
+        /// <summary>
+        /// Singleton
+        /// </summary>
         private static readonly Lazy<OpenWeatherProcessor> lazy = new Lazy<OpenWeatherProcessor>(() => new OpenWeatherProcessor());
 
         public static OpenWeatherProcessor Instance { get { return lazy.Value; } }
 
-        public IConfiguration Configuration { get; }
 
         public string BaseURL { get; set; }
         public string EndPoint { get; set; }
@@ -23,14 +28,12 @@ namespace OpenWeatherAPI
 
         private string longUrl;
 
-        private string apiKey;
+        public string ApiKey { get; set; }
 
         private OpenWeatherProcessor()
         {
             BaseURL = $"https://api.openweathermap.org/data/2.5";
             EndPoint = $"/weather?";
-
-            apiKey = AppSecretConfigurations.Instance.GetSecret("OWApiKey");
         }
 
         
@@ -40,6 +43,7 @@ namespace OpenWeatherAPI
         /// <returns></returns>
         public async Task<OpenWeatherOneCallModel> GetOneCallAsync()
         {
+            
             EndPoint = $"/onecall?";
 
             /// Src : https://stackoverflow.com/a/14517976/503842
@@ -49,7 +53,7 @@ namespace OpenWeatherAPI
             query["lat"] = Latitude; // Shawinigan
             query["lon"] = Longitude;
             query["units"] = "metric";
-            query["appid"] = apiKey;
+            query["appid"] = ApiKey;
 
 
             uriBuilder.Query = query.ToString();
@@ -62,7 +66,7 @@ namespace OpenWeatherAPI
         /// Appel le endpoint weather
         /// </summary>
         /// <returns></returns>
-        public async Task<OWCurrentWeaterModel> GetCurrentWeather()
+        public async Task<OWCurrentWeaterModel> GetCurrentWeatherAsync()
         {
             EndPoint = $"/weather?";
 
@@ -72,7 +76,7 @@ namespace OpenWeatherAPI
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
             query["q"] = "Shawinigan"; // Shawinigan
             query["units"] = "metric";
-            query["appid"] = apiKey;
+            query["appid"] = ApiKey;
 
             uriBuilder.Query = query.ToString();
             longUrl = uriBuilder.ToString();
@@ -96,8 +100,7 @@ namespace OpenWeatherAPI
         }
 
         private async Task<OWCurrentWeaterModel> doCurrentWeatherCall()
-        {
-
+        {            
             using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(longUrl))
             {
                 if (response.IsSuccessStatusCode)
