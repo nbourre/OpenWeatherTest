@@ -21,6 +21,9 @@ namespace OpenWeatherAPI
 
     public class OpenWeatherCurrentModel
     {
+        /// <summary>
+        /// Time in seconds since Unix Epoch
+        /// </summary>
         [JsonProperty("dt")]
         public long DateTime { get; set; }
 

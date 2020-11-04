@@ -18,7 +18,14 @@ namespace OpenWeatherAPI
         public string BaseURL { get; set; }
         public string EndPoint { get; set; }
 
+        /// <summary>
+        /// Longitude d'intérêt
+        /// </summary>
         public string Longitude { get; set; } = "-72.7491"; // Shawinigan par défaut
+
+        /// <summary>
+        /// Latitude d'intérêt
+        /// </summary>        
         public string Latitude { get; set; } = "46.5668";
 
         private string longUrl;
