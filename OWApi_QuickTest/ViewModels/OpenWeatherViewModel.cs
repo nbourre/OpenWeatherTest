@@ -1,9 +1,6 @@
 ﻿using OpenWeatherAPI;
 using OWApi_QuickTest.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OWApi_QuickTest.ViewModels
 {
     public class OpenWeatherViewModel : BaseViewModel
